@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: huaydin <huaydin@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: zabdulza <zabdulza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 09:37:23 by huaydin           #+#    #+#             */
-/*   Updated: 2023/01/28 09:37:23 by huaydin          ###   ########.fr       */
+/*   Created: 2023/12/20 16:35:55 by zabdulza          #+#    #+#             */
+/*   Updated: 2023/12/20 16:35:55 by zabdulza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
+/* 
+ * Splits the buffer containing the map data into the 2D map array. 
+ * Counts the number of exits, players, and coins as it parses the buffer.
+ * Stores the player position and initializes each row of the map with the respective data.
+ */
 static void	map_split2(t_main *main, int height, int width, char *buffer)
 {
 	int		y;
@@ -41,6 +46,10 @@ static void	map_split2(t_main *main, int height, int width, char *buffer)
 	}
 }
 
+/* 
+ * Parses the buffer to determine the map's width and height, 
+ * and then calls map_split2 to split the buffer into a 2D map array.
+ */
 static void	map_split(char *buffer, t_main *main)
 {
 	int		height;
@@ -67,6 +76,10 @@ static void	map_split(char *buffer, t_main *main)
 	main->map->y = height;
 }
 
+/* 
+ * Reads the contents of the map file into a buffer, then calls map_split to process 
+ * the buffer and initialize the map structure. Frees the buffer after processing.
+ */
 char	**map_init(char *path, t_main *main)
 {
 	char	*buffer;

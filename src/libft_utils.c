@@ -3,25 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   libft_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: huaydin <huaydin@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: zabdulza <zabdulza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 09:36:37 by huaydin           #+#    #+#             */
-/*   Updated: 2023/01/28 09:36:37 by huaydin          ###   ########.fr       */
+/*   Created: 2023/12/20 16:35:38 by zabdulza          #+#    #+#             */
+/*   Updated: 2023/12/20 16:35:38 by zabdulza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-size_t	ft_strlen(const char *s)
+/* 
+ * Returns the length of the given string.
+ */
+size_t	ft_strlen(const char *str)
 {
-	size_t	length;
+	size_t	len;
 
-	length = 0;
-	while (s[length])
-		length++;
-	return (length);
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
 }
 
+/* 
+ * Allocates memory for an array of 'count' elements of 'size' bytes each 
+ * and initializes all bytes to zero. 
+ */
 void	*ft_calloc(size_t count, size_t size)
 {
 	char	*ptr;
@@ -39,6 +46,10 @@ void	*ft_calloc(size_t count, size_t size)
 	return (ptr);
 }
 
+/* 
+ * Compares two strings (s1 and s2) up to 'n' characters. 
+ * Returns the difference between the first differing characters.
+ */
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	while ((*s1 || *s2) && (n > 0))
@@ -52,6 +63,10 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
+/* 
+ * Helper function to calculate the number of characters needed 
+ * to represent the given number 'm'.
+ */
 static int	ft_sizeofn(long m)
 {
 	int	i;
@@ -69,6 +84,10 @@ static int	ft_sizeofn(long m)
 	return (i);
 }
 
+/* 
+ * Converts an integer 'n' to its string representation.
+ * Returns a pointer to the newly created string.
+ */
 char	*ft_itoa(int n)
 {
 	char	*ptr;

@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: huaydin <huaydin@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: zabdulza <zabdulza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 09:37:15 by huaydin           #+#    #+#             */
-/*   Updated: 2023/01/28 17:09:04 by huaydin          ###   ########.fr       */
+/*   Created: 2023/12/20 16:35:49 by zabdulza          #+#    #+#             */
+/*   Updated: 2024/09/17 13:14:54 by zabdulza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
+/* 
+ * Recursively checks the map for valid paths using flood fill algorithm. 
+ * Marks the visited paths and checks if all coins and exits are reachable. 
+ * If a coin is found, decrements the count. If an exit is found, sets the exitflag to true.
+ */
 static void	ft_floodfill(t_main *main, int x, int y, int *count_c)
 {
 	if (x <= 0 || x >= main->map->x || y <= 0 || y >= main->map->y
@@ -36,6 +41,10 @@ static void	ft_floodfill(t_main *main, int x, int y, int *count_c)
 	ft_floodfill(main, (x - 1), y, count_c);
 }
 
+/* 
+ * Restores the map to its original state after the flood fill algorithm. 
+ * Converts all temporary marks ('c', 'e', 'o') back to their original values.
+ */
 static void	ft_restore(t_main *main)
 {
 	int	x;
@@ -60,6 +69,10 @@ static void	ft_restore(t_main *main)
 	}
 }
 
+/* 
+ * Checks the map to ensure that all coins are accessible and that there is a valid path to the exit. 
+ * Uses the flood fill algorithm to verify pathfinding, and if any check fails, exits the program with an error.
+ */
 static void	ft_check_valid_map_path(t_main *main)
 {
 	int	count_c;
@@ -74,6 +87,11 @@ static void	ft_check_valid_map_path(t_main *main)
 	return ;
 }
 
+/* 
+ * Checks the integrity of the map, ensuring there is exactly one player, at least one exit and coin, 
+ * and that all borders of the map are surrounded by walls ('1'). 
+ * Calls a function to validate that all important elements are reachable.
+ */
 void	ft_map_check(t_main *main)
 {
 	int	i;
@@ -102,3 +120,4 @@ void	ft_map_check(t_main *main)
 	}
 	ft_check_valid_map_path(main);
 }
+

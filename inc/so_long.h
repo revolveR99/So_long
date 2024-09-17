@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: huaydin <huaydin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zabdulza <zabdulza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/12 00:04:46 by huaydin           #+#    #+#             */
-/*   Updated: 2023/01/29 16:59:30 by huaydin          ###   ########.fr       */
+/*   Created: 2023/12/20 17:35:14 by zabdulza          #+#    #+#             */
+/*   Updated: 2023/12/21 17:09:01 by zabdulza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@
 
 # ifdef __APPLE__
 #  include "../minilibx-mac/mlx.h"
-#  define W_UP 13
 #  define S_DOWN 1
-#  define A_LEFT 0
 #  define D_RIGHT 2
+#  define W_UP 13
+#  define A_LEFT 0
 #  define ESC 53
 # endif
 # ifdef __linux__
 #  include "../minilibx-linux/mlx.h"
 #  define W_UP 119
-#  define S_DOWN 115
 #  define A_LEFT 97
+#  define S_DOWN 115
 #  define D_RIGHT 100
 #  define ESC 65307
 # endif
@@ -78,11 +78,11 @@ typedef struct s_main
 t_main				*main_init(char *path);
 char				**map_init(char *path, t_main *main);
 void				ft_map_check(t_main *main);
-void				draw_map(t_main *main);
+void				drawing_themap(t_main *main);
 void				xpm_to_img(t_main *main);
 int					key_event(int key, t_main *main);
 int					render(t_main *main);
-void				write_move_count(t_main *main);
+void				count_movement(t_main *main);
 void				ft_error(char *errorcode, t_main *main);
 void				*ft_calloc(size_t count, size_t size);
 size_t				ft_strlen(const char *s);

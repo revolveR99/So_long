@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: huaydin <huaydin@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: zabdulza <zabdulza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 09:37:07 by huaydin           #+#    #+#             */
-/*   Updated: 2023/01/28 09:37:07 by huaydin          ###   ########.fr       */
+/*   Created: 2023/12/20 16:35:44 by zabdulza          #+#    #+#             */
+/*   Updated: 2023/12/20 16:35:44 by zabdulza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
+/* 
+ * Displays an error message (errorcode) to stderr, destroys the main struct if it exists, 
+ * and exits the program with a failure status (errno 2).
+ */
 void	ft_error(char *errorcode, t_main *main)
 {
 	errno = 2;
@@ -23,6 +27,10 @@ void	ft_error(char *errorcode, t_main *main)
 	exit(1);
 }
 
+/* 
+ * Loads images from XPM files and assigns them to the corresponding fields in the main structure. 
+ * If any image fails to load, the program calls ft_error to exit.
+ */
 void	xpm_to_img(t_main *main)
 {
 	main->img->pr = mlx_xpm_file_to_image(
@@ -52,6 +60,11 @@ void	xpm_to_img(t_main *main)
 		ft_error("Error\nImage initialization failed", main);
 }
 
+/* 
+ * Initializes the main structure, allocates memory for map and image structures, 
+ * initializes the mlx environment, and creates a new window. 
+ * Calls functions to load images and initialize the map.
+ */
 t_main	*main_init(char *path)
 {
 	t_main	*main;
@@ -71,6 +84,10 @@ t_main	*main_init(char *path)
 	return (main);
 }
 
+/* 
+ * Checks if all necessary image files exist and are readable. 
+ * If any file is missing or unreadable, the program exits with an error message.
+ */
 void	check_files(void)
 {
 	if (access("img/wall.xpm", F_OK | R_OK) == -1
@@ -84,11 +101,16 @@ void	check_files(void)
 		|| access("img/exit.xpm", F_OK | R_OK) == -1)
 	{
 		errno = 2;
-		perror("Error\nFailed eading image file");
+		perror("Error\nFailed reading image file");
 		exit(1);
 	}
 }
 
+/* 
+ * Main entry point of the program. 
+ * Validates the command-line arguments and checks the map file and image files.
+ * Initializes the main structure, checks the map, draws the map, and sets up hooks for key events and rendering.
+ */
 int	main(int argc, char **argv)
 {
 	t_main		*main;
@@ -103,10 +125,11 @@ int	main(int argc, char **argv)
 	check_files();
 	main = main_init(argv[1]);
 	ft_map_check(main);
-	draw_map(main);
+	drawing_themap(main);
 	mlx_hook(main->win, 2, 1, key_event, main);
 	mlx_hook(main->win, 17, 0, ft_destroy, main);
 	mlx_loop_hook(main->mlx, render, main);
 	mlx_loop(main->mlx);
 	return (0);
 }
+

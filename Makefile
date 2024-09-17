@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: huaydin <huaydin@student.42.fr>            +#+  +:+       +#+         #
+#    By: zabdulza <zabdulza@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/28 09:37:49 by huaydin           #+#    #+#              #
-#    Updated: 2023/01/29 18:48:56 by huaydin          ###   ########.fr        #
+#    Created: 2023/12/20 16:14:06 by zabdulza          #+#    #+#              #
+#    Updated: 2023/12/20 16:15:34 by zabdulza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,16 +17,10 @@ ifeq ($(UNAME_S),Linux)
 	MLX_LIB = $(MLX)/libmlx.a
 	FLAGS = -lXext -lX11 ./$(MLX)/libmlx.a -I./$(MLX) -L./$(MLX) -lmlx
 endif
-ifeq ($(UNAME_S),Darwin)
-	MLX = minilibx-mac
-	EVENT = src/event_mac.c
-	FLAGS = -framework OpenGL -framework AppKit -I./$(MLX) -L./$(MLX) -lmlx
-endif
 
 NAME = so_long
 CC = cc
-SRC = src/main.c src/map.c src/draw.c src/render.c src/libft_utils.c \
-	src/map_check.c $(EVENT)
+SRC = $(wildcard src/*.c)
 OBJ = $(SRC:%.c=%.o)
 CFLAGS = -Wall -Wextra -Werror
 
@@ -37,11 +31,11 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@make -C $(MLX)
 	@$(CC) -o $@ $? $(MLX_LIB) $(FLAGS) $(CFLAGS)
-	@echo Done...
-	@echo Usage:    ./so_long maps/map.ber
-	@echo or just:  make test
-	@echo Controls: press W A S D to move the Player
-
+	@echo Game is ready...
+	@echo GAME_START:    ./so_long maps/map.ber
+	@echo OR:  make test
+	@echo Controls: W A S D
+	
 $(OBJ): $(SRC)
 	@$(CC) $(CFLAGS) -c $?
 	@mv *.o src
