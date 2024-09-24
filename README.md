@@ -47,6 +47,9 @@ To start the game, simply run the executable with a path to map file as paramete
 
 ![An example screenshot of so_long](screenshot.png)
 
+![Screenshot](https://github.com/user-attachments/assets/cfd5f63e-37ff-4457-bc84-1c9271df8b08)
+
+
 
 ## Useful Resources
 
