@@ -45,7 +45,7 @@ To start the game, simply run the executable with a path to map file as paramete
 -   Use the W A S D keys to move the player character
 -   Press the ESC or click (X) to exit
 
-![An example screenshot of so_long](screenshot.png)
+![An example screenshot of so_long]
 
 ![Screenshot](https://github.com/user-attachments/assets/cfd5f63e-37ff-4457-bc84-1c9271df8b08)
 
